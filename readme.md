@@ -1,6 +1,6 @@
 # ReallyCare
 
-The vision of this project is to make use of a cgm of a certain brand, and improve the accompanying software. In first phase, it will be more of a test platform, and stuff will not be stable. 
+The vision of this project is to make use of a cgm of an undisclosed brand, and improve the accompanying software. In first phase, it will be more of a test platform, and stuff will not be stable. 
 
 The first phase is to wrap the caregivers website in a new webapp, which is browser agnostic and also works well when when the webapp is put on the homescreen of a mobile device (which is not the (always) the case for the original app.)
 
