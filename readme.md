@@ -11,6 +11,7 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 - it should be possible to input carb grams from another application/extension
 
 ## Work log
+- found out that the XHR request to `patient/connect/ConnectViewerServlet?cpSerialNumber=NONE&msgType=last24hours&requestTime=1510242271693` actully reveals more information that is available in the GUI
 - tried using the 'mechanize' gem, but couldn't get it working
 - Tried to login in using Selenium IDE on Firefox (had to downgrade my Firefox); got that working: 
 <table>
