@@ -5,9 +5,10 @@ The vision of this project is to make use of a cgm of a certain brand, and impro
 The first phase is to wrap the caregivers website in a new webapp, which is browser agnostic and also works well when when the webapp is put on the homescreen of a mobile device (which is not the (always) the case for the original app.)
 
 ## Other shortcomings to fix
-- (simple?) caregivers have no access to historical data
+- (simple?) caregivers have no access to historical data, nor to manual BG values, MEAL values, INSULIN values
 - SMS alerts are depending on 3G/4G connection of the receiver device
-- 
+- cannot add markers retroactively
+- it should be possible to input carb grams from another application/extension
 
 ## Work log
 - tried using the 'mechanize' gem, but couldn't get it working
@@ -34,3 +35,9 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 	<td></td>
 </tr>
 </table>
+
+## References
+
+* http://ruby.bastardsbook.com/chapters/web-crawling/
+* https://www.distilled.net/resources/web-scraping-with-ruby-and-nokogiri-for-beginners/
+
