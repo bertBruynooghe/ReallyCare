@@ -1,3 +1,5 @@
+/* jshint node: true */
+/* jshint browser: true */
 "use strict";
 
 try {
@@ -5,46 +7,31 @@ try {
 } catch (e) {
     var Spooky = require('../lib/spooky');
 }
-
 var http = require('http');
 
 http.createServer(function (request, response) {
-    response.writeHead(200, {
-        'Content-Type': 'text/plain'
-    });
     var spooky = new Spooky({
-        child: {
-            transport: 'http'
-        },
-        casper: {
-            logLevel: 'debug',
-            verbose: true
-        }
+        child: {transport: 'http'},
+        casper: {logLevel: 'debug', verbose: true}
     }, function (err) {
         if (err) {
-            e = new Error('Failed to initialize SpookyJS');
+            var e = new Error('Failed to initialize SpookyJS');
             e.details = err;
             throw e;
         }
 
-        spooky.start(
-            'http://en.wikipedia.org/wiki/Spooky_the_Tuff_Little_Ghost');
+        spooky.start('http://en.wikipedia.org/wiki/Spooky_the_Tuff_Little_Ghost');
         spooky.then(function () {
-            //this.emit
             this.emit('hello', 'Hello, from ' + this.evaluate(function () {
                 return document.title;
             }));
         });
         spooky.run();
     });
-    spooky['parentResponse'] = response
 
     spooky.on('error', function (e, stack) {
-        console.error(e);
-
-        if (stack) {
-            console.log(stack);
-        }
+        response.writeHead(500, {'Content-Type': 'text/html'});
+        response.end('<h1>'+e+'</h1>' + stack);
     });
 
     /*
@@ -57,11 +44,9 @@ http.createServer(function (request, response) {
     */
 
     spooky.on('hello', function (greeting) {
-        console.log(greeting);
+        response.writeHead(200, {'Content-Type': 'text/plain'});
         response.end(greeting);
     });
-
-    spooky.on
 
     spooky.on('log', function (log) {
         if (log.space === 'remote') {
