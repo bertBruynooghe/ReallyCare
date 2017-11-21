@@ -36,7 +36,8 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 	<td></td>
 </tr>
 </table>
-- got a small thing working in casperjs
+- got the grab working in casperjs, `dotenv -f .env casperjs caspertest.js`
+- started the same exercise in node.js with spooky, but got no further than a basic grab from an spooky example served through node.
 
 ## References
 
