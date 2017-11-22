@@ -7,8 +7,9 @@ casper.page.customHeaders = {
 }; // set headers
 
 casper.then(function() {
+  this.capture('casper1.png');
   this.fill('form[action="j_security_check"]', 
-            { 'j_username': 'BertBruynooghe', 
+            { 'j_username': system.env.USERNAME, 
               'j_password': system.env.PASSWORD }, 
             true);
 });
@@ -16,7 +17,7 @@ casper.then(function() {
 casper.then(function(){
   this.waitForResource(/ConnectViewerServlet/);
 
-  // TOOD: check if we have to wait before calling the GET, 
+  // TODO: check if we have to wait before calling the GET, 
   // and on which point we can do the GET
 
   this.on("resource.received", function(resource){
