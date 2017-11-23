@@ -1,21 +1,21 @@
-/* jshint node: true */
-/* jshint browser: true */
-"use strict";
+/*jslint node, this, devel, fudge*/
 
 require('dotenv').config();
-
+var Spooky;
 try {
-    var Spooky = require('spooky');
-} catch (e) {
-    var Spooky = require('../lib/spooky');
+    Spooky = require('spooky');
+} catch (ignore) {
+    Spooky = require('../lib/spooky');
 }
 var http = require('http');
 
-http.createServer(function (request, response) {
+http.createServer(function (ignore, response) {
+    'use strict';
     console.log(process.env.THE_SITE);
     console.log(process.env.USERNAME);
 
-    var spooky = new Spooky({
+    var spooky;
+    spooky = new Spooky({
         child: {
             transport: 'http'
         },
@@ -37,19 +37,22 @@ http.createServer(function (request, response) {
         });
 
         // not sure why it can't be in the previous 'then'
+        var username = process.env.USERNAME;
+        var password = process.env.PASSWORD;
         spooky.then([{
-            username: process.env.USERNAME,
-            password: process.env.PASSWORD
+            username: username,
+            password: password
         }, function () {
             this.capture('node1.png');
             this.fill('form[action="j_security_check"]', {
-                    'j_username': username,
-                    'j_password': password
-                },
-                true);
+                'j_username': username,
+                'j_password': password
+            },
+                    true);
         }]);
 
         spooky.then(function () {
+            var __utils__ = undefined;
             this.waitForResource(/ConnectViewerServlet/);
             this.capture('node2.png');
 
@@ -57,18 +60,20 @@ http.createServer(function (request, response) {
             //     // TOOD: check if we have to wait before calling the GET, 
             //     // and on which point we can do the GET
 
-            this.on("resource.received", function(resource){
-                if (resource.contentType == 'application/json' && resource.stage == "end") {
-                console.log(resource.url) ;
-                //console.log(JSON.stringify(phantom.cookies, null, 2));
-                var data = this.evaluate(function(url){
-                    return __utils__.sendAJAX(url, "GET");
-                }, resource.url);
-                console.log('***' + JSON.parse(data).lastSG.sg);
-                console.log('***' + response);
-                // this.emit('hello', this.evaluate(function () {
-                //     return JSON.parse(data).lastSG.sg;
-                // }));
+            this.on("resource.received", function (resource) {
+                if (resource.contentType === 'application/json' && resource.stage == "end") {
+                    console.log(resource.url);
+                    //console.log(JSON.stringify(phantom.cookies, null, 2));
+                    var data = this.evaluate(function (url) {
+                        return __utils__.sendAJAX(url, "GET");
+                    }, resource.url);
+                    console.log('***' + JSON.parse(data).lastSG.sg);
+                    console.log('***' + response);
+                    this.emit('hello', 'tada');
+                    //this.evaluate(function () {
+                        //return 'tada';
+                        //return JSON.parse(data).lastSG.sg;
+                    //}));
                 }
             });
         });
