@@ -1,0 +1,20 @@
+{
+  "name": "really_care",
+  "version": "0.0.1",
+  "description": "Accessing a non-disclosed CGM",
+  "engines": {
+    "node": "6.11.1"
+  },
+  "main": "nodetest.js",
+  "scripts": {
+    "start": "node nodetest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bertBruynooghe/ReallyCare"
+  },
+  "keywords": [
+    "CGM"
+  ],
+  "license": "MIT"
+}

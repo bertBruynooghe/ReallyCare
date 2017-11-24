@@ -1,8 +1,12 @@
-var http = require('http');
+/*jslint node, this, fudge*/
 
-http.createServer(function (request, response) {
+var http = require('http'),
+    port = process.env.PORT || 8080;
+
+http.createServer(function (ignore, response) {
+    "use strict";
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.end('Hello World\n');
-}).listen(8080);
+}).listen(port);
 
 console.log('Server started');
