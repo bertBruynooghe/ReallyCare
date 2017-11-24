@@ -1,7 +1,8 @@
 /*jslint node, this, fudge*/
 
 require('dotenv').config();
-var Spooky;
+var Spooky,
+    port = process.env.PORT || 8080;
 try {
     Spooky = require('spooky');
 } catch (ignore) {
@@ -88,6 +89,6 @@ http.createServer(function (ignore, response) {
     //         console.log(log.message.replace(/ \- .*/, ''));
     //     }
     // });
-}).listen(8080);
+}).listen(port);
 
 console.log('Server started');
