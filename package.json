@@ -10,7 +10,8 @@
     "start": "node thetest.js"
   },
   "dependencies": {
-    "spooky": ">=0.2.5"
+    "spooky": ">=0.2.5",
+    "dotenv": ">=4.0.0"
   },
   "repository": {
     "type": "git",
