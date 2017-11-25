@@ -7,7 +7,7 @@
   },
   "main": "nodetest.js",
   "scripts": {
-    "start": "node nodetest.js"
+    "start": "node thetest.js"
   },
   "dependencies": {
     "spooky": ">=0.2.5"
