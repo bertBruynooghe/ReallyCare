@@ -1,1 +1,1 @@
-web: node --debug=5858 thetest.js
+web: node thetest.js

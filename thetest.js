@@ -1,6 +1,5 @@
 /*jslint node, this, fudge*/
 
-require('dotenv').config();
 var Spooky,
     port = process.env.PORT || 8080;
 try {

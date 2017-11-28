@@ -37,7 +37,17 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 </tr>
 </table>
 - got the grab working in casperjs, `dotenv -f .env casperjs caspertest.js`
-- started the same exercise in node.js with spooky, but got no further than a basic grab from an spooky example served through node.
+- got a basic scenario working in node.js
+- start local development using `fn start web=1` to reuse Procfile
+
+## TODO
+
+* check how log a session is valid, and see if we can keep the session open all the time
+* authentication; if possible reuse the username/login of the original app
+* authentication: remember me?
+* d3
+* introduction of express.js
+
 
 ## References
 
