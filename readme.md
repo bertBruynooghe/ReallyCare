@@ -42,7 +42,7 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 
 ## TODO
 
-* check how log a session is valid, and see if we can keep the session open all the time
+* check how long a session is valid, and see if we can keep the session open all the time
 * authentication; if possible reuse the username/login of the original app
 * authentication: remember me?
 * d3
