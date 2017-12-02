@@ -1,4 +1,7 @@
 /*jslint node, this, fudge*/
+/*global
+  __utils__
+*/
 
 var Spooky,
     port = process.env.PORT || 8080;
@@ -15,7 +18,8 @@ http.createServer(function (ignore, response) {
     var spooky,
         username = process.env.USERNAME,
         password = process.env.PASSWORD,
-        site = process.env.THE_SITE;
+        site = process.env.THE_SITE,
+        ajaxURL = site + "/patient/connect/ConnectViewerServlet";
     spooky = new Spooky({
         child: {
             transport: 'http'
@@ -35,33 +39,26 @@ http.createServer(function (ignore, response) {
         spooky.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) ' +
                 'AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 ' +
                 'Safari/604.3.5');
-        spooky.thenOpen(site, function () {});
-        spooky.then([{username: username, password: password}, function () {
-            var casper = this;
-            //casper.capture('node1.png');
-            casper.fill('form[action="j_security_check"]', {
+        spooky.thenOpen(site);
+
+        spooky.then([{username: username, password: password}, function login() {
+            this.fill('form[action="j_security_check"]', {
                 'j_username': username,
                 'j_password': password
             }, true);
         }]);
 
-        spooky.then([{site: site}, function () {
-            var casper = this,
-                __utils__ = undefined;
-            var ajaxURL = site + "/patient/connect/ConnectViewerServlet";
+        spooky.then([{ajaxURL: ajaxURL}, function waitForREady() {
+            this.waitForResource(function (resource) {
+                return (resource.url.indexOf(ajaxURL) >= 0);
+            });
+        }]);
 
-            casper.waitForResource(function (resource) {
-                if (resource.url.indexOf(ajaxURL) >= 0) {
-                    console.log('***' + resource.url)
-                    var data = casper.evaluate(function (url) {
-                        return __utils__.sendAJAX(url, "GET");
-                    }, ajaxURL + '?cpSerialNumber=NONE&msgType=last24hours&requestTime=' + new Date().valueOf());
-                    casper.emit('dataFound',
-                            JSON.parse(data).lastSG.sg.toString());
-                    return true;
-                }
-                return false;
-            }, function (ignore) {});
+        spooky.then([{ajaxURL: ajaxURL}, function retrieveData() {
+            var data = this.evaluate(function (url) {
+                return __utils__.sendAJAX(url, "GET");
+            }, ajaxURL + '?cpSerialNumber=NONE&msgType=last24hours&requestTime=' + new Date().valueOf());
+            this.emit('dataFound', JSON.parse(data).lastSG.sg.toString());
         }]);
 
         spooky.run();

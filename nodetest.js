@@ -1,12 +1,22 @@
-/*jslint node, this, fudge*/
+/*jslint node, fudge*/
 
-var http = require('http'),
-    port = process.env.PORT || 8080;
+var https = require('https');
 
-http.createServer(function (ignore, response) {
-    "use strict";
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Hello World\n');
-}).listen(port);
+https.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', function (resp) {
+    'use strict';
+    var data = '';
 
-console.log('Server started');
+    // A chunk of data has been recieved.
+    resp.on('data', function (chunk) {
+        data += chunk;
+    });
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', function () {
+        console.log(JSON.parse(data).explanation);
+    });
+
+}).on("error", function (err) {
+    'use strict';
+    console.log("Error: " + err.message);
+});
