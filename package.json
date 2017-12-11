@@ -10,7 +10,11 @@
     "start": "node thetest.js"
   },
   "dependencies": {
-    "spooky": ">=0.2.5"
+    "spooky": "~0.2.5",
+    "jslint": "~0.11.0",
+    "lodash": "~4.17.4",
+    "common": "~0.2.5",
+    "request": "~2.83.0"
   },
   "repository": {
     "type": "git",

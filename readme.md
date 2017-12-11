@@ -39,6 +39,8 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 - got the grab working in casperjs, `dotenv -f .env casperjs caspertest.js`
 - got a basic scenario working in node.js
 - start local development using `fn start web=1` to reuse Procfile
+- discovered that more or less the same functionality is delivered on Nightscout's miniMed plugin. Maybe I should integrate with that and fork later on, but for now, I just copied the thing.
+- MiniMed plugin does not consider insulin or carbs, but they can be retrieved through the GUI in the csv reports, but only for complete days (not today). But we already know the events, so we can show those in Nightscout
 
 ## TODO
 
