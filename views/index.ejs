@@ -2,25 +2,26 @@
 <html>
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width">
   </head>
   <body>
     <strong><%= data.lastSG.sg %></strong><br>
     <% var maxValue = 400,
            hiLimit = 300,
            loLimit = 65; %>
-    <svg width="<%= data.sgs.length * 4 %>" height="<%= maxValue %>">
-      <rect x="0" y="0" width="<%= data.sgs.length * 4 %>" height="<%= maxValue - hiLimit %>" fill="red" />
-      <rect x="0" y="<%= maxValue - loLimit %>" width="<%= data.sgs.length * 4 %>" height="<%= loLimit %>" fill="red" />
+    <svg class="graph" viewbox="0 0 <%= data.sgs.length %> <%= maxValue %>" preserveAspectRatio="none">
+      <rect x="0" y="0" width="<%= data.sgs.length %>" height="<%= maxValue - hiLimit %>" fill="red" />
+      <rect x="0" y="<%= maxValue - loLimit %>" width="<%= data.sgs.length %>" height="<%= loLimit %>" fill="red" />
       <%  var d = '',
               lastVal = 0;
           for (var i=0; i < data.sgs.length; i++) {
             var val = data.sgs[i].sg;
             if (val) {
-              d += (lastVal ? 'L' : 'M') + i * 4 + ' ' + (maxValue - val) + ' ';
+              d += (lastVal ? 'L' : 'M') + i + ' ' + (maxValue - val) + ' ';
             }
             lastVal = val;
           }%>  
-      <path d="<%= d %>" stroke="black" stroke-width="2" fill="none"/>
+      <path d="<%= d %>" stroke="black" fill="none" vector-effect="non-scaling-stroke" stroke-width="2" />
     </svg>
     <script>
       console.log(JSON.parse('<%- JSON.stringify(data,2) %>'));
