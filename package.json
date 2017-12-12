@@ -1,16 +1,18 @@
 {
-  "name": "really_care",
+  "name": "really-care",
   "version": "0.0.1",
-  "description": "Accessing a non-disclosed CGM",
-  "engines": {
-    "node": "6.11.1"
-  },
-  "main": "nodetest.js",
+  "private": true,
   "scripts": {
-    "start": "node thetest.js"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "spooky": "~0.2.5",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5",
     "jslint": "~0.11.0",
     "lodash": "~4.17.4",
     "common": "~0.2.5",
