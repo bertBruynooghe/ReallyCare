@@ -2,6 +2,9 @@
   "name": "really-care",
   "version": "0.0.1",
   "private": true,
+  "nodemonConfig": {
+    "ext": "js,ejs,css"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },

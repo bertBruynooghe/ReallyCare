@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' /> 
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
     <strong><%= data.lastSG.sg %></strong><br>
+    <%= data.lastSG.datetime %><br>
     <% var maxValue = 400,
            hiLimit = 300,
            loLimit = 65; %>
@@ -14,7 +15,7 @@
       <rect x="0" y="<%= maxValue - loLimit %>" width="<%= data.sgs.length %>" height="<%= loLimit %>" fill="red" />
       <%  var d = '',
               lastVal = 0;
-          for (var i=0; i < data.sgs.length; i++) {
+          for (var i = 0; i < data.sgs.length; i++) {
             var val = data.sgs[i].sg;
             if (val) {
               d += (lastVal ? 'L' : 'M') + i + ' ' + (maxValue - val) + ' ';
