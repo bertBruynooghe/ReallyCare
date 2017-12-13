@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
-    <strong><%= data.lastSG.sg %></strong><br>
-    <%= data.lastSG.datetime %><br>
+    <strong><%= data.lastSG.sg %> <%= data.bgUnits %> ,</strong>
+    <%= moment(data.lastSG.datetime).fromNow(); %><br>
+    <dl>
+      <dt>trend</dt>
+      <dd><%= data.lastSGTrend %></dd>
+      <dt>sensor</dt>
+      <dd><%= data.sensorDurationHours %> uur</dd>
+      <dt>calibratie binnen</dt>
+      <dd><%= data.timeToNextCalibHours %> uur</dd>
+    </dl>
     <% var maxValue = 400,
            hiLimit = 300,
            loLimit = 65; %>
