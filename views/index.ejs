@@ -24,12 +24,13 @@
         <dd>is afgelopen</dd>
       <% } %>
     </dl>
+    <!-- TODO: we can have different limit per time interval -->
     <% var maxValue = 400,
-           hiLimit = 300,
-           loLimit = 65; %>
+           hiLimit = data.limits[0].highLimit,
+           loLimit = data.limits[0].lowLimit; %>
     <svg class="graph" viewbox="0 0 <%= data.sgs.length %> <%= maxValue %>" preserveAspectRatio="none">
-      <rect x="0" y="0" width="<%= data.sgs.length %>" height="<%= maxValue - hiLimit %>" fill="red" />
-      <rect x="0" y="<%= maxValue - loLimit %>" width="<%= data.sgs.length %>" height="<%= loLimit %>" fill="red" />
+      <line x1="0" y1="<%= maxValue - hiLimit %>" y2="<%= maxValue - hiLimit %>" x2="<%= data.sgs.length %>" stroke="orange" />
+      <line x1="0" y1="<%= maxValue - loLimit %>" y2="<%= maxValue - loLimit %>" x2="<%= data.sgs.length %>" height="<%= loLimit %>" stroke="red" />
       <%  var d = '',
               lastVal = 0;
           for (var i = 0; i < data.sgs.length; i++) {
