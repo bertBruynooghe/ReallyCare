@@ -29,18 +29,19 @@
            hiLimit = data.limits[0].highLimit,
            loLimit = data.limits[0].lowLimit; %>
     <svg class="graph" viewbox="0 0 <%= data.sgs.length %> <%= maxValue %>" preserveAspectRatio="none">
-      <line x1="0" y1="<%= maxValue - hiLimit %>" y2="<%= maxValue - hiLimit %>" x2="<%= data.sgs.length %>" stroke="orange" />
-      <line x1="0" y1="<%= maxValue - loLimit %>" y2="<%= maxValue - loLimit %>" x2="<%= data.sgs.length %>" height="<%= loLimit %>" stroke="red" />
-      <%  var d = '',
-              lastVal = 0;
+      <g transform=" translate(0 <%= maxValue %>), scale(1 -1)">
+      <line x1="0" y1="<%= hiLimit %>" y2="<%= hiLimit %>" x2="<%= data.sgs.length %>" stroke="orange" />
+      <line x1="0" y1="<%= loLimit %>" y2="<%= loLimit %>" x2="<%= data.sgs.length %>" stroke="red" />
+      <%  var d = '', lastVal = 0;
           for (var i = 0; i < data.sgs.length; i++) {
             var val = data.sgs[i].sg;
             if (val) {
-              d += (lastVal ? 'L' : 'M') + i + ' ' + (maxValue - val) + ' ';
+              d += (lastVal ? 'L' : 'M') + i + ' ' + val + ' ';
             }
             lastVal = val;
           }%>  
       <path d="<%= d %>" stroke="black" fill="none" vector-effect="non-scaling-stroke" stroke-width="2" />
+      </g>
     </svg>
     <script>
       console.log(JSON.parse('<%- JSON.stringify(data,2) %>'));
