@@ -23,7 +23,7 @@ The first phase is to wrap the caregivers website in a new webapp, which is brow
 * authentication; if possible reuse the username/login of the original app
 * authentication: remember me?
 * d3
-
+* reuse of carelink repo
 
 ## References
 
