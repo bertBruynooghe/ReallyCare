@@ -1,4 +1,6 @@
 var express = require('express');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,6 +11,23 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(passport.initialize());
+//app.use(passport.session());
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    // //User.findOne({ username: username }, function(err, user) {
+    //  if (err) { return done(err); }
+    // #  if (!user) {
+    // #    return done(null, false, { message: 'Incorrect username.' });
+    // #  }
+    // #  if (!user.validPassword(password)) {
+    // #    return done(null, false, { message: 'Incorrect password.' });
+    // #  }
+        'use strict';
+        return done(null, {});
+    }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,13 +43,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.get('/login', function (ignore, res) {
+    'use strict';
+    res.render('login');
+});
+app.post('/login',
+        passport.authenticate('local', {successRedirect: '/',
+        failureRedirect: '/login',
+        session: false  }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
+}); 
 
 // error handler
 app.use(function(err, req, res, next) {
