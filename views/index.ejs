@@ -10,14 +10,12 @@
       <dt>sensor</dt>
       <% if (data.sensorDurationHours) { %>
         <dd>
-        loopt af <%= moment((moment() + moment.duration(data.sensorDurationHours))).format() %>
+        loopt af <%= moment((moment() + moment.duration(data.sensorDurationHours))).format('dddd H:mm') %>
         </dd>
         <dt></dt><strong><%= data.lastSG.sg %> <%= data.bgUnits %> ,</strong></dt>
         <dd></dd><%= moment(data.lastSG.datetime).fromNow(); %></dd>
         <dt>trend</dt>
         <dd><%= data.lastSGTrend %></dd>  
-        <dt>calibratie binnen</dt>
-        <dd><%= moment.duration(data.timeToNextCalibHours, 'hours').humanize() %></dd>
         <dt>calibratie</dt>
         <dd>vóór <%= moment(moment() + moment.duration(data.timeToNextCalibHours, 'hours')).format('k:mm') %></dd>
       <% } else { %>
