@@ -148,7 +148,7 @@ var Client = exports.Client = function (options) {
         doFetchCookie,
         getConnectData,
         parseData,
-        callback.bind(null, null),
+        callback.bind(null, null)
       ],
       callback
     );
@@ -168,7 +168,14 @@ var Client = exports.Client = function (options) {
     );
   }
 
-  function fetch(callback) {
+function fetch(cookieStore, callback) {
+    if (callback) {
+      jar = request.jar(cookieStore);
+    }
+    else {
+      callback = cookieStore;
+      cookieStore = undefined;
+    }
     if (haveLoginCookie(jar)) {
       fetchLoggedIn(callback);
     } else {
